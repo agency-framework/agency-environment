@@ -1,0 +1,19 @@
+{
+  "name": "agency-environment",
+  "version": "1.0.0",
+  "description": "agency - frontend environment",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/StephanGerbeth/agency-environment.git"
+  },
+  "author": "Stephan Gerbeth",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/StephanGerbeth/agency-environment/issues"
+  },
+  "homepage": "https://github.com/StephanGerbeth/agency-environment#readme"
+}

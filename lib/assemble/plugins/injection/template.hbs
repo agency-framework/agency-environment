@@ -1,0 +1,12 @@
+<script type="text/javascript">
+    {{#if weinre}}
+        if(/(weinre)/g.test(location.search)) {
+            document.write('<script src="//{{host}}:{{weinre.port}}/target/target-script-min.js#anonymous"></'+'script>');
+        }
+    {{/if}}
+    {{#if livereload}}
+        if('WebSocket' in window || 'MozWebSocket' in window) {
+            document.write('<script src="//{{host}}:{{livereload.port}}/livereload.js?snipver=1"></' + 'script>');
+        }
+    {{/if}}
+</script>

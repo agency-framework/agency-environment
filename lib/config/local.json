@@ -1,0 +1,49 @@
+{
+    "development": {
+        "debug": true,
+        "server": {
+            "host": "localhost",
+            "dest": "dev",
+            "hapi": {
+                "root": "./",
+                "port": 8050,
+                "services": {
+                    "auth": {
+                        "secret": "NeverShareYourSecret"
+                    },
+                    "kewego": {
+                        "appKey": "APPKey"
+                    }
+                }
+            },
+            "webpack": {
+                "port": 8051
+            },
+            "weinre": {
+                "port": 8052
+            },
+            "livereload": {
+                "port": 8053
+            }
+        }
+    },
+
+    "production": {
+        "server": {
+            "host": "localhost",
+            "dest": "production",
+            "hapi": {
+                "root": "./production",
+                "port": 8050,
+                "services": {
+                    "auth": {
+                        "secret": "NeverShareYourSecret"
+                    },
+                    "kewego": {
+                        "appKey": "APPKey"
+                    }
+                }
+            }
+        }
+    }
+}
