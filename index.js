@@ -59,3 +59,5 @@ module.exports = function(server, config, instance) {
         }
     });
 }
+
+process.once('SIGINT', function() { process.exit(0); });
