@@ -7,14 +7,14 @@ module.exports = function(server, config, instance) {
 
     assemble.task('clean', require('./lib/tasks/clean')('clean', config.tasks.clean));
     assemble.task('copy', require('./lib/tasks/copy')('copy', config.tasks.copy));
-    assemble.task('handlebars', require('./lib/tasks/handlebars')('handlebars', config.tasks.handlebars, server.config));
+    assemble.task('handlebars', require('./lib/tasks/handlebars')('handlebars', config.tasks.handlebars, server));
     assemble.task('postcss', require('./lib/tasks/postcss')('postcss', config.tasks.postcss));
     assemble.task('purecss', require('./lib/tasks/purecss')(config.tasks.purecss));
     assemble.task('sitemap', require('./lib/tasks/sitemap')('sitemap', config.tasks.sitemap));
     assemble.task('webpack', require('./lib/tasks/webpack')('webpack', config.tasks.webpack)());
     assemble.task('watch', function(cb) {
-        if(server.config.livereload) {
-            livereload.listen({port: server.config.livereload.port});
+        if(server.livereload) {
+            livereload.listen({port: server.livereload.port});
         }
         cb();
     });
@@ -37,27 +37,18 @@ module.exports = function(server, config, instance) {
         runSequence('clean', ['copy', 'webpack:embed', 'purecss'], 'postcss', 'handlebars', ['sitemap'], callback);
     });
 
-    if(server.config.webpack) {
-        var task = config.tasks.webpack.subtasks.find(function(task) {
-            return !!(task.hotReplacement);
-        });
-        if(task) {
-            server.config.webpack.module = task.module;
-            server.config.webpack.files = task.files;
-        }
-    }
-
     assemble.task('server', function () {
         if(instance === 'development') {
             require('gulp-nodemon')({
-                script: require.resolve(server.script),
+                script: require.resolve(config.server.name),
                 ignore: ['src/**/*'],
-                env: {CONFIG: JSON.stringify(server.config)}
+                args: ['--config=' + config.server.config],
+                env: {CONFIG: JSON.stringify(server)}
             });
         } else {
-            require(server.script)(server.config);
+            require(server.script)(server);
         }
     });
-}
+};
 
 process.once('SIGINT', function() { process.exit(0); });
