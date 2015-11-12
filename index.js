@@ -1,6 +1,7 @@
 "use strict";
+var options = require('minimist')(process.argv.slice(2));
 
-module.exports = function(server, config, instance) {
+module.exports = function(server, config) {
     var assemble = require('./lib/assemble/config');
     var runSequence = require('run-sequence').use(assemble);
     var livereload = require('gulp-livereload');
@@ -22,7 +23,7 @@ module.exports = function(server, config, instance) {
     assemble.task('default', ['watch', 'server']);
 
     assemble.task('run', function(callback) {
-        if(instance === 'development') {
+        if(options.env === 'development') {
             runSequence('prebuild', 'default', callback);
         } else {
             runSequence('build', 'server', callback);
@@ -38,15 +39,14 @@ module.exports = function(server, config, instance) {
     });
 
     assemble.task('server', function () {
-        if(instance === 'development') {
+        if(options.env === 'development') {
             require('gulp-nodemon')({
                 script: require.resolve(config.server.name),
                 ignore: ['src/**/*'],
-                args: ['--config=' + config.server.config],
-                env: {CONFIG: JSON.stringify(server)}
+                args: ['--config=' + options.config]
             });
         } else {
-            require(server.script)(server);
+            require(config.server.name);
         }
     });
 };
