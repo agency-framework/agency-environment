@@ -56,6 +56,7 @@
     "run-sequence": "^1.1.4",
     "style-loader": "^0.13.0",
     "through2": "^2.0.0",
+    "upath": "^0.1.6",
     "url-loader": "^0.5.6",
     "webpack": "^1.12.3",
     "webpack-polyfills-plugin": "0.0.7",
