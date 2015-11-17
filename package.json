@@ -1,6 +1,6 @@
 {
   "name": "agency-environment",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "agency - frontend environment",
   "main": "assemblefile.js",
   "scripts": {
