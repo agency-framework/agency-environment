@@ -4,3 +4,5 @@
 [![Windows Build status](https://img.shields.io/appveyor/ci/StephanGerbeth/agency-environment.svg?style=flat&label=Windows%20build)](https://ci.appveyor.com/project/StephanGerbeth/agency-environment)
 [![Dependency Status](https://img.shields.io/david/StephanGerbeth/agency-environment.svg?style=flat)](https://david-dm.org/StephanGerbeth/agency-environment)
 [![devDependency Status](https://img.shields.io/david/dev/StephanGerbeth/agency-environment.svg?style=flat)](https://david-dm.org/StephanGerbeth/agency-environment#info=devDependencies)
+
+---
