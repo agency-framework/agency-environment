@@ -1,0 +1,96 @@
+{
+    "build": {
+        "dest": "build"
+    },
+    "development": {
+        "host": "localhost",
+        "dest": "dev",
+        "hapi": {
+            "options": {
+                "root": "./",
+                "port": 8050,
+                "secret": "UNSAFE: CHANGE ME"
+            },
+            "routes": [{
+                "module": "agency-server/lib/hapi/route/debug",
+                "options": {}
+            }, {
+                "module": "agency-server/lib/hapi/route/kewego",
+                "options": {
+                    "appKey": "UNSAFE: CHANGE ME"
+                }
+            }, {
+                "module": "agency-server/lib/hapi/route/auth/session",
+                "options": {}
+            }, {
+                "module": "agency-server/lib/hapi/route/static",
+                "options": {}
+            }, {
+                "module": "agency-server/lib/hapi/route/proxy",
+                "options": {}
+            }]
+        },
+        "websocket": {
+
+        },
+        "webpack": {
+            "plugins": [
+                "../webpack/plugins/dedupe",
+                "../webpack/plugins/hotReplacement"
+            ],
+            "module": {
+                "preLoaders": [{
+                    "test": ".js$",
+                    "exclude": "node_modules",
+                    "loader": "jshint-loader"
+                }],
+                "loaders": [
+                    { "test": ".hbs$", "loader": "handlebars-loader" },
+                    { "test": ".css$", "loader": "style-loader!css-loader" },
+                    { "test": ".(png|jpg|gif|svg|ttf|woff|eot)$", "loader": "url-loader?limit=100000" }
+                ]
+            },
+            "files": {
+                "src": "./src/js/main.js",
+                "dest": "js/app.js"
+            },
+            "port": 8051
+        },
+        "weinre": {
+            "port": 8052
+        },
+        "livereload": {
+            "port": 8053
+        }
+    },
+
+    "production": {
+        "host": "localhost",
+        "dest": "production",
+        "hapi": {
+            "options": {
+                "root": "./production",
+                "port": 8050,
+                "secret": "UNSAFE: CHANGE ME"
+            },
+            "routes": [{
+                "module": "agency-server/lib/hapi/route/debug",
+                "options": {}
+            }, {
+                "module": "agency-server/lib/hapi/route/kewego",
+                "options": {
+                    "appKey": "UNSAFE: CHANGE ME"
+                }
+            }, {
+                "module": "agency-server/lib/hapi/route/auth/session",
+                "options": {}
+            }, {
+                "module": "agency-server/lib/hapi/route/static",
+                "options": {}
+            }, {
+                "module": "agency-server/lib/hapi/route/proxy",
+                "options": {}
+            }]
+        }
+    }
+}

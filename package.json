@@ -2,9 +2,11 @@
   "name": "agency-environment",
   "version": "1.0.0",
   "description": "agency - frontend environment",
-  "main": "index.js",
+  "main": "assemblefile.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "node node_modules/assemble/bin/assemble build --serverConfig=./env/config/local.json --configTasks=./env/config/tasks.json --env=build",
+    "prebuild": "node node_modules/assemble/bin/assemble prebuild --serverConfig=./env/config/local.json --configTasks=./env/config/tasks.json --env=build",
+    "test": "npm run build"
   },
   "repository": {
     "type": "git",
