@@ -9,13 +9,13 @@ var assemble = require('./lib/assemble/config');
 var runSequence = require('run-sequence').use(assemble);
 var livereload = require('gulp-livereload');
 
-assemble.task('clean', require('./lib/tasks/clean')('clean', tasksConfig.clean));
-assemble.task('copy', require('./lib/tasks/copy')('copy', tasksConfig.copy));
+assemble.task('clean', require('./lib/tasks/clean')('clean', tasksConfig.clean, serverConfig));
+assemble.task('copy', require('./lib/tasks/copy')('copy', tasksConfig.copy, serverConfig));
 assemble.task('handlebars', require('./lib/tasks/handlebars')('handlebars', tasksConfig.handlebars, serverConfig));
-assemble.task('postcss', require('./lib/tasks/postcss')('postcss', tasksConfig.postcss));
+assemble.task('postcss', require('./lib/tasks/postcss')('postcss', tasksConfig.postcss, serverConfig));
 assemble.task('purecss', require('./lib/tasks/purecss')(tasksConfig.purecss));
-assemble.task('sitemap', require('./lib/tasks/sitemap')('sitemap', tasksConfig.sitemap));
-assemble.task('webpack', require('./lib/tasks/webpack')('webpack', tasksConfig.webpack)());
+assemble.task('sitemap', require('./lib/tasks/sitemap')('sitemap', tasksConfig.sitemap, serverConfig));
+assemble.task('webpack', require('./lib/tasks/webpack')('webpack', tasksConfig.webpack, serverConfig)());
 assemble.task('watch', function(cb) {
     if(serverConfig.livereload) {
         livereload.listen({port: serverConfig.livereload.port});
