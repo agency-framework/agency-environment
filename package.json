@@ -5,7 +5,6 @@
   "main": "assemblefile.js",
   "scripts": {
     "build": "node node_modules/assemble/bin/assemble build --serverConfig=./env/config/local.json --configTasks=./env/config/tasks.json --env=build",
-    "prebuild": "node node_modules/assemble/bin/assemble prebuild --serverConfig=./env/config/local.json --configTasks=./env/config/tasks.json --env=build",
     "test": "npm run build"
   },
   "repository": {
