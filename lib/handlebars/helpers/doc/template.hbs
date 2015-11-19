@@ -3,6 +3,10 @@
     {{{preview}}}
 </div>
 
+<style type="text/css">
+    {{{style}}}
+</style>
+
 <h2>Code</h2>
 <section class="code">
     <h3>HTML</h3>
@@ -15,15 +19,24 @@
     <pre><code class="hljs">{{{code.json}}}</code></pre>
 </section>
 
-<h2>Related Links</h2>
-<nav aria-label="Related links">
-    <ul>
-        {{#each relatedPages}}
-            <li><a href="{{url}}">{{title}}</a></li>
-        {{/each}}
-    </ul>
-</nav>
+{{#if info.integrated.length}}
+    <h2>Integrated Partials</h2>
+    <nav aria-label="integrated partials">
+        <ul>
+            {{#each info.integrated}}
+                <li><a href="{{url}}">{{title}}</a></li>
+            {{/each}}
+        </ul>
+    </nav>
+{{/if}}
 
-<style type="text/css">
-        {{style}}
-</style>
+{{#if info.extended.length}}
+    <h2>Extended Partials</h2>
+    <nav aria-label="extended partials">
+        <ul>
+            {{#each info.extended}}
+                <li><a href="{{url}}">{{title}}</a></li>
+            {{/each}}
+        </ul>
+    </nav>
+{{/if}}
