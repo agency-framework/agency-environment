@@ -27,6 +27,7 @@
         ]
     },
     "handlebars": {
+        "assets": "<%= destination %>/assets/",
         "layouts": "./src/tmpl/partials/layouts/**/*.hbs",
         "partials": ["./src/tmpl/partials/**/*.hbs"],
         "scripts": {
@@ -86,6 +87,10 @@
                         "params": []
                     },
                     {
+                        "name": "postcss-clearfix",
+                        "params": []
+                    },
+                    {
                         "name": "autoprefixer",
                         "params": [
                             {
@@ -95,6 +100,10 @@
                     },
                     {
                         "name": "postcss-discard-comments",
+                        "params": []
+                    },
+                    {
+                        "name": "cssnano",
                         "params": []
                     }
                 ],
@@ -139,8 +148,8 @@
                 "name": "app",
                 "hotReplacement": true,
                 "plugins": [
-                    "../webpack/plugins/dedupe",
-                    "../webpack/plugins/uglify"
+                    {"script": "../webpack/plugins/dedupe"},
+                    {"script": "../webpack/plugins/uglify"}
                 ],
                 "module": {
                     "preLoaders": [
@@ -166,16 +175,25 @@
                     ]
                 },
                 "files": {
-                    "src": "./src/js/main.js",
+                    "src": ["./src/js/main.js"],
                     "dest": "<%= destination %>/js/app.js"
                 }
             },
             {
                 "name": "embed",
+
+                "entry": {
+                    "picture": "./src/js/polyfills/picture",
+                    "animationFrame": "./src/js/polyfills/animationFrame"
+                },
+
                 "plugins": [
-                    "../webpack/plugins/polyfills",
-                    "../webpack/plugins/dedupe",
-                    "../webpack/plugins/uglify"
+                    {"script": "../webpack/plugins/dedupe"},
+                    {"script": "../webpack/plugins/chunk", "config": {
+                        "main": "embed._main.js",
+                        "packages": ["picture", "animationFrame"]
+                    }},
+                    {"script": "../webpack/plugins/uglify"}
                 ],
                 "module": {
                     "preLoaders": [
@@ -187,8 +205,10 @@
                     ]
                 },
                 "files": {
-                    "src": "./src/js/embed.js",
-                    "dest": "<%= destination %>/js/embed.js"
+                    "src": ["./src/js/polyfills/animationFrame", "./src/js/polyfills/picture"],
+                    "dest": "<%= destination %>/js/embed.[name].js",
+                    "library": ["window", "[name]"],
+                    "libraryTarget": "this"
                 }
             }
         ]
