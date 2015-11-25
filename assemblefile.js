@@ -18,7 +18,9 @@ assemble.task('sitemap', require('./lib/tasks/sitemap')('sitemap', tasksConfig.s
 assemble.task('webpack', require('./lib/tasks/webpack')('webpack', tasksConfig.webpack, serverConfig)());
 assemble.task('watch', function(cb) {
     if(serverConfig.livereload) {
-        livereload.listen({port: serverConfig.livereload.port});
+        livereload.listen({
+            port: serverConfig.livereload.port
+        });
     }
     cb();
 });
