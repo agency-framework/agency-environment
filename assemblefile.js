@@ -2,8 +2,8 @@
 
 var template = require('lodash/string/template');
 var options = require('minimist')(process.argv.slice(2));
-var serverConfig = require((process.cwd() + '/' + options.serverConfig || (process.cwd() + '/' + './env/config/local.json')))[(options.env || 'development')];
-var tasksConfig = JSON.parse(template(JSON.stringify(require(process.cwd() + '/' + options.configTasks)))({'destination': serverConfig.dest}));
+var serverConfig = JSON.parse(template(JSON.stringify(require((process.cwd() + '/' + options.serverConfig || (process.cwd() + '/' + './env/config/local.json')))))({'root': process.cwd()}))[(options.env || 'development')];
+var tasksConfig = JSON.parse(template(JSON.stringify(require(process.cwd() + '/' + options.configTasks)))({'destination': serverConfig.dest, 'root': process.cwd()}));
 
 var assemble = require('./lib/assemble/config');
 var runSequence = require('run-sequence').use(assemble);
