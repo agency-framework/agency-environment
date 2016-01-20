@@ -13,28 +13,15 @@
     <pre><code class="hljs">{{{code.html}}}</code></pre>
     <h3>Handlebars</h3>
     <pre><code class="hljs">{{{code.hbs}}}</code></pre>
-    <h3>YAML</h3>
-    <pre><code class="hljs">{{{code.yaml}}}</code></pre>
     <h3>JSON</h3>
     <pre><code class="hljs">{{{code.json}}}</code></pre>
 </section>
 
-{{#if info.integrated.length}}
-    <h2>Integrated Partials</h2>
+{{#if info.length}}
+    <h2>Related Partials</h2>
     <nav aria-label="integrated partials">
         <ul>
-            {{#each info.integrated}}
-                <li><a href="{{url}}">{{title}}</a></li>
-            {{/each}}
-        </ul>
-    </nav>
-{{/if}}
-
-{{#if info.extended.length}}
-    <h2>Extended Partials</h2>
-    <nav aria-label="extended partials">
-        <ul>
-            {{#each info.extended}}
+            {{#each info}}
                 <li><a href="{{url}}">{{title}}</a></li>
             {{/each}}
         </ul>
