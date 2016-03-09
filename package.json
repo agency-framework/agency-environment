@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/StephanGerbeth/agency-environment#readme",
   "dependencies": {
-    "assemble": "0.7.4",
+    "assemble": "0.9.1",
     "autoprefixer": "6.1.0",
     "cheerio": "0.19.0",
     "css-loader": "0.23.0",
