@@ -1,6 +1,6 @@
 {
   "name": "agency-environment",
-  "version": "1.0.3",
+  "version": "2.0.1",
   "description": "agency - frontend environment",
   "main": "assemblefile.js",
   "scripts": {
@@ -51,7 +51,7 @@
     "jshint": "2.8.0",
     "jshint-loader": "0.8.3",
     "lodash": "3.10.1",
-    "minimist": "1.2.0",    
+    "minimist": "1.2.0",
     "mkdirp": "0.5.1",
     "modernizr-loader": "0.0.4",
     "postcss-clearfix": "0.2.0",
