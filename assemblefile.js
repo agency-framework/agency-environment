@@ -31,5 +31,5 @@ gulp.task('build', function(callback) {
 });
 
 gulp.task('prebuild', function(callback) {
-    runSequence('clean', ['copy', 'webpack:embed', 'purecss'], 'postcss', 'handlebars', ['sitemap'], callback);
+    runSequence('clean', ['copy', 'fontmin', 'webpack:embed', 'purecss'], 'postcss', 'handlebars', ['sitemap'], callback);
 });
