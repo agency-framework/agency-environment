@@ -120,7 +120,6 @@
         ]
     },
     "purecss": {
-        "nodePath" : "node_modules",
         "prefix" : "grid",
         "columnHasPrefix" : false,
         "columnPrefix": "col",
@@ -132,7 +131,7 @@
         },
         "files": {
             "dest": "./src/css/generated/",
-            "src" : ["base-min", "grids-core-min"]
+            "src" : ["base", "grids-core"]
         }
     },
     "sitemap": {
