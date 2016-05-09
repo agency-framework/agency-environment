@@ -120,19 +120,21 @@
         ]
     },
     "purecss": {
-        "prefix" : "grid",
-        "columnHasPrefix" : false,
-        "columnPrefix": "col",
-        "breakpoints": {
-            "xs": "screen and (min-width: 30em)",
-            "sm": "screen and (min-width: 48em)",
-            "md": "screen and (min-width: 62em)",
-            "lg": "screen and (min-width: 75em)"
-        },
-        "files": {
-            "dest": "./src/css/generated/",
-            "src" : ["base", "grids-core"]
-        }
+      "prefix": "grid",
+      "columnHasPrefix": true,
+      "columns": 12,
+      "columnPrefix": "col",
+      "wrapperBreakpoints": ["md", "lg"],
+      "breakpoints": {
+        "xs": "30em",
+        "sm": "48em",
+        "md": "62em",
+        "lg": "75em"
+      },
+      "files": {
+        "dest": "./generated/pcss/",
+        "src": ["base", "grids-core"]
+      }
     },
     "sitemap": {
         "subtasks": [
