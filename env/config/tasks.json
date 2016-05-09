@@ -216,5 +216,15 @@
                 }
             }
         ]
+    },
+    "zipcompress" : {
+      "subtasks": [{
+        "name": "default",
+        "excludes" : ["!<%= destination %>/**/fonts/**/*.{css,svg,woff2}"],
+        "files": {
+          "src" : ["<%= destination %>/*", "!<%= destination %>/*.*"],
+          "dest": "<%= destination %>"
+        }
+      }]
     }
 }
