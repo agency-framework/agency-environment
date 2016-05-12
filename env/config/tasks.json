@@ -156,6 +156,7 @@
                     {"script": "../webpack/plugins/uglify"}
                 ],
                 "module": {
+                    "customs" : ["agency-environment/lib/handlebars/loader/custom"],
                     "preLoaders": [
                         {
                             "test": ".js$",
