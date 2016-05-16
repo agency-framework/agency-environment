@@ -10,27 +10,26 @@ Features:
 
 
 Config ```tasks.json```
-```
-{
-  "purecss": {
-    "prefix": "grid",
-    "columnHasPrefix": true,
-    "columns": 12,
-    "columnPrefix": "col",
-    "wrapperBreakpoints": ["md", "lg"],
-    "breakpoints": {
-      "xs": "30em",
-      "sm": "48em",
-      "md": "62em",
-      "lg": "75em"
-    },
-    "files": {
-      "dest": "./generated/pcss/",
-      "src": ["base", "grids-core"]
+
+    {
+      "purecss": {
+        "prefix": "grid",
+        "columnHasPrefix": true,
+        "columns": 12,
+        "columnPrefix": "col",
+        "wrapperBreakpoints": ["md", "lg"],
+        "breakpoints": {
+          "xs": "30em",
+          "sm": "48em",
+          "md": "62em",
+          "lg": "75em"
+        },
+        "files": {
+          "dest": "./generated/pcss/",
+          "src": ["base", "grids-core"]
+        }
+      }
     }
-  }
-}
-```
 
 #### prefix
 
@@ -68,23 +67,35 @@ Type: ```Object```
 
 Sets the breakpoints that are required to generate the grid classes and media querys vars.
 
-```
-{
-  "xs": "30em",
-  "sm": "48em",
-  "md": "62em",
-  "lg": "75em"
-}
-```
+    {
+      "xs": "30em",
+      "sm": "48em",
+      "md": "62em",
+      "lg": "75em"
+    }
 
 #### files
 
-Type: ```String```
+Type: ```Object```
 
 Sets PureCSS files and destination path for generated files.
-```
-{
-  "dest": "./generated/pcss/",
-  "src": ["base", "grids-core"]
-}
-```
+
+    {
+      "dest": "./generated/pcss/",
+      "src": ["base", "grids-core"]
+    }
+
+
+##### dest
+
+Type: ```String```
+
+Destination for generated files.
+
+##### src
+
+Type: ```Array```
+
+
+Gives the files to prefix.
+Files comes from ```purecss``` *node_modules*.
