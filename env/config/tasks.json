@@ -123,6 +123,7 @@
       "prefix": "grid",
       "columnHasPrefix": true,
       "columns": 12,
+      "gutterWidth" : "0.9375rem",
       "columnPrefix": "col",
       "wrapperBreakpoints": ["md", "lg"],
       "breakpoints": {
