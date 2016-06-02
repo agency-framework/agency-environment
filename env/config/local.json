@@ -39,6 +39,7 @@
                 "../webpack/plugins/hotReplacement"
             ],
             "module": {
+                "customs" : ["agency-environment/lib/handlebars/loader/custom"],
                 "preLoaders": [{
                     "test": ".js$",
                     "exclude": "node_modules",
