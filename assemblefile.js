@@ -28,7 +28,7 @@ gulp.task('watch', function(cb) {
 gulp.task('zip-compress', require('./lib/tasks/zip-compress')('zip-compress', tasksConfig.zipcompress, serverConfig));
 
 gulp.task('build', function(callback) {
-    runSequence('prebuild', 'webpack:app', callback);
+    runSequence('prebuild', 'webpack:app', 'zip-compress:default', callback);
 });
 
 gulp.task('prebuild', function(callback) {
@@ -36,7 +36,7 @@ gulp.task('prebuild', function(callback) {
 });
 
 gulp.task('build-banner', function(callback) {
-    runSequence('clean', ['copy', 'fontmin', 'webpack:app', 'postcss'], 'handlebars', 'zip-compress', callback);
+    runSequence('clean', ['copy', 'fontmin', 'webpack:app', 'postcss'], 'handlebars', 'zip-compress:banner', callback);
 });
 
 gulp.task('prebuild-banner', function(callback) {

@@ -224,10 +224,17 @@
     "zipcompress" : {
       "subtasks": [{
         "name": "default",
+        "excludes" : [],
+        "files": {
+          "src" : ["<%= destination %>"],
+          "dest": "<%= destination %>"
+        }
+      },{
+        "name": "banner",
         "excludes" : ["!<%= destination %>/**/fonts/**/*.{css,svg,woff2}"],
         "files": {
           "src" : ["<%= destination %>/*", "!<%= destination %>/*.*"],
-          "dest": "<%= destination %>"
+          "dest": "<%= destination %>/compressed"
         }
       }]
     }
