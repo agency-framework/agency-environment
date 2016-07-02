@@ -2,8 +2,21 @@
 
 var template = require('lodash/string/template');
 var options = require('minimist')(process.argv.slice(2));
-var serverConfig = JSON.parse(template(JSON.stringify(require((process.cwd() + '/' + options.serverConfig || (process.cwd() + '/' + './env/config/local.json')))))({'root': process.cwd()}))[(options.env || 'development')];
-var tasksConfig = JSON.parse(template(JSON.stringify(require(process.cwd() + '/' + options.configTasks)))({'destination': serverConfig.dest, 'root': process.cwd()}));
+
+var serverConfig = JSON.parse(template(JSON.stringify(require((process.cwd() + '/' + options.serverConfig || (process.cwd() + '/' + './env/config/local.json')))))({
+    'root': process.cwd()
+}))[(options.env || 'development')];
+var tasksConfig = JSON.parse(template(JSON.stringify(require(process.cwd() + '/' + options.configTasks)))({
+    'destination': serverConfig.dest,
+    'root': process.cwd()
+}));
+
+var isPackageBuild = false;
+if (options.packageDev) {
+    // Package development
+    isPackageBuild = true;
+}
+
 
 var gulp = require('gulp');
 var runSequence = require('run-sequence').use(gulp);
@@ -18,7 +31,7 @@ gulp.task('purecss', require('./lib/tasks/purecss')(tasksConfig.purecss));
 gulp.task('sitemap', require('./lib/tasks/sitemap')('sitemap', tasksConfig.sitemap, serverConfig));
 gulp.task('webpack', require('./lib/tasks/webpack')('webpack', tasksConfig.webpack, serverConfig)());
 gulp.task('watch', function(cb) {
-    if(serverConfig.livereload) {
+    if (serverConfig.livereload) {
         livereload.listen({
             port: serverConfig.livereload.port
         });
@@ -32,7 +45,7 @@ gulp.task('build', function(callback) {
 });
 
 gulp.task('prebuild', function(callback) {
-    runSequence('clean', ['copy', 'fontmin', 'webpack:embed', 'purecss'], 'postcss', 'handlebars', ['sitemap'], callback);
+    runSequence('register-packages:default', 'clean', ['copy', 'fontmin', 'webpack:embed', 'purecss'], 'postcss', 'handlebars', ['sitemap'], callback);
 });
 
 gulp.task('build-banner', function(callback) {
@@ -42,3 +55,5 @@ gulp.task('build-banner', function(callback) {
 gulp.task('prebuild-banner', function(callback) {
     runSequence('clean', ['copy', 'fontmin', 'postcss'], 'handlebars', callback);
 });
+
+gulp.task('register-packages', require('./lib/tasks/register-packages')('register-packages',tasksConfig, serverConfig));
