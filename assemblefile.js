@@ -11,13 +11,6 @@ var tasksConfig = JSON.parse(template(JSON.stringify(require(process.cwd() + '/'
     'root': process.cwd()
 }));
 
-var isPackageBuild = false;
-if (options.packageDev) {
-    // Package development
-    isPackageBuild = true;
-}
-
-
 var gulp = require('gulp');
 var runSequence = require('run-sequence').use(gulp);
 var livereload = require('gulp-livereload');
