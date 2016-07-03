@@ -6,8 +6,18 @@
 	"bugs": {
 		"url": "https://github.com/StephanGerbeth/agency-environment/issues"
 	},
-	"license": "GPL-3.0",
-	"author": "Stephan Gerbeth",
+	"license": "MIT",
+	"author": "Stephan Gerbeth <stephan.gerbeth@gmail.com>",
+	"contributors": [
+		{
+			"name": "Stephan Gerbeth",
+			"email": "stephan.gerbeth@grabarzundpartner.de"
+		},
+		{
+			"name": "Thorn Walli",
+			"email": "lammpee@gmail.com; thorn.walli@grabarzundpartner.de"
+		}
+	],
 	"main": "assemblefile.js",
 	"repository": {
 		"type": "git",
