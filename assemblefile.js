@@ -1,6 +1,6 @@
 "use strict";
 
-var template = require('lodash/string/template');
+var template = require('lodash/template');
 var options = require('minimist')(process.argv.slice(2));
 
 var serverConfig = JSON.parse(template(JSON.stringify(require((process.cwd() + '/' + options.serverConfig || (process.cwd() + '/' + './env/config/local.json')))))({
