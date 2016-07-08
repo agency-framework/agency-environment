@@ -1,5 +1,5 @@
 module.exports = [
 {{#each sources}}
-    {name: "{{@key}}", id: require.resolve("{{this}}"), controller: require("{{this}}")}{{#unless @last}},{{/unless}}
+    {name: "{{name}}", id: require.resolve("{{id}}"), controller: require("{{id}}")}{{#unless @last}},{{/unless}}
 {{/each}}
 ];
