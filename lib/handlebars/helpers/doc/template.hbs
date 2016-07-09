@@ -1,34 +1,37 @@
-<h2>Preview</h2>
-<section class="preview" role="preview">
-  <div class="preview">
-    {{{preview}}}
-  </div>
-  <style type="text/css">
-    {{{style}}}
-  </style>
-  </div>
-</section>
+<section class="partial" data-partial="doc-template">
 
-
-<h2>Code</h2>
-<section class="code" role="code">
-  <h3>HTML</h3>
-  <pre><code class="hljs">{{{code.html}}}</code></pre>
-  <h3>Handlebars</h3>
-  <pre><code class="hljs">{{{code.hbs}}}</code></pre>
-  <h3>JSON</h3>
-  <pre><code class="hljs">{{{code.json}}}</code></pre>
-</section>
-
-{{#if info.length}}
-<h2>Related Partials</h2>
-  <section role="related-partials">
-    <nav aria-label="integrated partials">
-      <ul>
-        {{#each info}}
-          <li><a href="{{url}}">{{title}}</a></li>
-        {{/each}}
-      </ul>
-    </nav>
+  <h2>Preview</h2>
+  <section class="partial" data-partial="doc-template/preview" role="preview">
+    <div class="preview">
+      {{{preview}}}
+    </div>
+    <style type="text/css">
+      {{{style}}}
+    </style>
+    </div>
   </section>
-{{/if}}
+
+  <h2>Code</h2>
+  <section class="partial" data-partial="doc-template/code" role="code">
+    <h3>HTML</h3>
+    <pre><code class="hljs">{{{code.html}}}</code></pre>
+    <h3>Handlebars</h3>
+    <pre><code class="hljs">{{{code.hbs}}}</code></pre>
+    <h3>JSON</h3>
+    <pre><code class="hljs">{{{code.json}}}</code></pre>
+  </section>
+
+  {{#if info.length}}
+  <h2>Related Partials</h2>
+  <section class="partial" data-partial="doc-template/related-partials" role="related-partials">
+      <nav aria-label="integrated partials">
+        <ul>
+          {{#each info}}
+            <li><a href="{{url}}">{{title}}</a></li>
+          {{/each}}
+        </ul>
+      </nav>
+    </section>
+  {{/if}}
+
+</section>
