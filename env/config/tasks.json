@@ -101,7 +101,10 @@
     "columnPrefix": "col",
     "breakpoints": {
       "default": {
-        "gutterWidth": "0.9375rem"
+        "gutterWidth": "0.9375rem",
+        "wrapper": {
+          "overflow" : "hidden"
+        }
       },
       "xs": {
         "width": "30em",
