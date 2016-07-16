@@ -34,7 +34,7 @@ gulp.task('watch', function(cb) {
 gulp.task('zip-compress', require('./lib/tasks/zip-compress')('zip-compress', tasksConfig.zipcompress, serverConfig));
 
 gulp.task('build', function(callback) {
-    runSequence('prebuild', 'webpack:app', 'zip-compress:default', callback);
+    runSequence('prebuild', 'webpack:app', callback);
 });
 
 gulp.task('prebuild', function(callback) {
