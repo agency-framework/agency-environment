@@ -50,3 +50,8 @@ gulp.task('prebuild-banner', function(callback) {
 });
 
 gulp.task('register-packages', require('./lib/tasks/register-packages')('register-packages',tasksConfig, serverConfig));
+
+gulp.task('export-hbs', require('./lib/tasks/export/hbs')('export-hbs', tasksConfig.exporthbs, serverConfig));
+gulp.task('export', function(callback) {
+    runSequence('clean', 'register-packages:default', 'export-hbs', callback);
+});
