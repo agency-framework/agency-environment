@@ -36,9 +36,9 @@ gulp.task('prebuild', function(callback) {
 });
 
 gulp.task('build-banner', function(callback) {
-    runSequence('clean', ['copy', 'fontmin', 'webpack:app', 'postcss'], 'handlebars', 'zip-compress:banner', callback);
+    runSequence('clean', ['copy', 'fontmin', 'webpack:embed', 'webpack:app', 'postcss'], 'handlebars', 'zip-compress:banner', callback);
 });
 
 gulp.task('prebuild-banner', function(callback) {
-    runSequence('clean', ['copy', 'fontmin', 'postcss'], 'handlebars', callback);
+    runSequence('clean', ['copy', 'fontmin', 'webpack:embed', 'postcss'], 'handlebars', callback);
 });
