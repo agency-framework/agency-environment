@@ -1,5 +1,6 @@
 "use strict";
 
+require('colors');
 var template = require('lodash/template');
 var options = require('minimist')(process.argv.slice(2));
 
@@ -14,6 +15,10 @@ var tasksConfig = JSON.parse(template(JSON.stringify(require(process.cwd() + '/'
 var gulp = require('gulp');
 var runSequence = require('run-sequence').use(gulp);
 var livereload = require('gulp-livereload');
+
+// tasks
+
+// general
 
 gulp.task('clean', require('./lib/tasks/clean')('clean', tasksConfig.clean, serverConfig));
 gulp.task('copy', require('./lib/tasks/copy')('copy', tasksConfig.copy, serverConfig));
@@ -31,7 +36,8 @@ gulp.task('watch', function(cb) {
     }
     cb();
 });
-gulp.task('zip-compress', require('./lib/tasks/zip-compress')('zip-compress', tasksConfig.zipcompress, serverConfig));
+
+// build
 
 gulp.task('build', function(callback) {
     runSequence('prebuild', 'webpack:app', callback);
@@ -41,6 +47,8 @@ gulp.task('prebuild', function(callback) {
     runSequence('register-packages:default', 'clean', ['copy', 'fontmin', 'webpack:embed', 'purecss'], 'postcss', 'handlebars', ['sitemap'], callback);
 });
 
+// banner build
+
 gulp.task('build-banner', function(callback) {
     runSequence('clean', ['copy', 'fontmin', 'webpack:app', 'postcss'], 'handlebars', 'zip-compress:banner', callback);
 });
@@ -49,9 +57,31 @@ gulp.task('prebuild-banner', function(callback) {
     runSequence('clean', ['copy', 'fontmin', 'postcss'], 'handlebars', callback);
 });
 
-gulp.task('register-packages', require('./lib/tasks/register-packages')('register-packages',tasksConfig, serverConfig));
+// register-packages
 
-gulp.task('export-hbs', require('./lib/tasks/export/hbs')('export-hbs', tasksConfig.exporthbs, serverConfig));
-gulp.task('export', function(callback) {
-    runSequence('clean', 'register-packages:default', 'export-hbs', callback);
-});
+if (tasksConfig.registerpackages) {
+    gulp.task('register-packages', require('./lib/tasks/register-packages')('register-packages', tasksConfig, serverConfig));
+} else {
+    console.log('[' + 'task'.gray + '][' + 'register-packages'.gray + ']', 'Missing Config'.bold.red);
+}
+
+// zip-compress
+
+if (tasksConfig.zipcompress) {
+    gulp.task('zip-compress', require('./lib/tasks/zip-compress')('zip-compress', tasksConfig.zipcompress, serverConfig));
+} else {
+    console.log('[' + 'task'.gray + '][' + 'zip-compress'.gray + ']', 'Missing Config'.bold.red);
+}
+
+// export
+
+if (tasksConfig.exporthbs) {
+    gulp.task('export-hbs', require('./lib/tasks/export/hbs')('export-hbs', tasksConfig.exporthbs, serverConfig));
+} else {
+    console.log('[' + 'task'.gray + '][' + 'export-hbs'.gray + ']', 'Missing Config'.bold.red);
+}
+if (tasksConfig.exporthbs) {
+    gulp.task('export', function(callback) {
+        runSequence('clean', 'register-packages:default', 'export-hbs', callback);
+    });
+}
