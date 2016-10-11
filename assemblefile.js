@@ -2,8 +2,9 @@
 
 var template = require('lodash/string/template');
 var options = require('minimist')(process.argv.slice(2));
-var serverConfig = JSON.parse(template(JSON.stringify(require((process.cwd() + '/' + options.serverConfig || (process.cwd() + '/' + './env/config/local.json')))))({'root': process.cwd()}))[(options.env || 'development')];
-var tasksConfig = JSON.parse(template(JSON.stringify(require(process.cwd() + '/' + options.configTasks)))({'destination': serverConfig.dest, 'root': process.cwd()}));
+var upath = require('upath');
+var serverConfig = JSON.parse(template(JSON.stringify(require(upath.join(process.cwd(), (options.serverConfig || './env/config/local.json')))))({'root': upath.join(process.cwd())}))[(options.env || 'development')];
+var tasksConfig = JSON.parse(template(JSON.stringify(require(upath.join(process.cwd(), options.configTasks))))({'destination': upath.join(serverConfig.dest), 'root': upath.join(process.cwd())}));
 
 var gulp = require('gulp');
 var runSequence = require('run-sequence').use(gulp);
