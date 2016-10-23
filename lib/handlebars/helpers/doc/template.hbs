@@ -1,7 +1,7 @@
-<section class="partial" data-partial="doc-template">
+<section class="pkg" data-pkg="agency-pkg-documentation/doc-template">
 
   <h1>Preview <span class="partial">{{{previewPartial}}}</span></h1>
-  <section class="partial" data-partial="doc-template/preview" role="preview">
+  <section class="pkg" data-pkg="agency-pkg-documentation/doc-template/preview" role="preview">
     <div class="preview">
       {{{preview}}}
     </div>
@@ -12,7 +12,7 @@
   </section>
 
   <h2>Code</h2>
-  <section class="partial" data-partial="doc-template/code" role="code">
+  <section class="pkg" data-pkg="agency-pkg-documentation/doc-template/code" role="code">
     <h3>HTML</h3>
     <pre role="code-html"><code class="hljs">{{{code.html}}}</code></pre>
     <h3>Handlebars</h3>
@@ -23,7 +23,7 @@
 
   {{#if info.length}}
   <h2>Related Partials</h2>
-  <section class="partial" data-partial="doc-template/related-partials" role="related-partials">
+  <section class="pkg" data-pkg="agency-pkg-documentation/doc-template/related-partials" role="related-partials">
       <nav aria-label="integrated partials">
         <ul>
           {{#each info}}
