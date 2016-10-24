@@ -2,9 +2,9 @@
   "name": "agency-environment",
   "version": "3.0.0",
   "description": "agency - frontend environment",
-  "homepage": "https://github.com/StephanGerbeth/agency-environment#readme",
+  "homepage": "https://github.com/agency-framework/agency-environment#readme",
   "bugs": {
-    "url": "https://github.com/StephanGerbeth/agency-environment/issues"
+    "url": "https://github.com/agency-framework/agency-environment/issues"
   },
   "license": "MIT",
   "author": "Stephan Gerbeth <stephan.gerbeth@gmail.com>",
@@ -18,7 +18,7 @@
   "main": "assemblefile.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/StephanGerbeth/agency-environment.git"
+    "url": "git+https://github.com/agency-framework/agency-environment.git"
   },
   "scripts": {
     "build": "node node_modules/assemble/bin/assemble build --serverConfig=./env/config/local.json --configTasks=./env/config/tasks.json --env=build",
