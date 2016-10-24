@@ -6,3 +6,49 @@
 [![devDependency Status](https://img.shields.io/david/dev/StephanGerbeth/agency-environment.svg?style=flat)](https://david-dm.org/StephanGerbeth/agency-environment#info=devDependencies)
 
 ---
+
+### Default Configuration's
+
+#### Zip-Compress
+
+```json
+...
+"zipcompress": {
+  "subtasks": [{
+    "name": "default",
+    "excludes": [],
+    "files": {
+      "src": ["<%= destination %>"],
+      "dest": "<%= destination %>"
+    }
+  }]
+},
+...
+```
+##### excludes
+List of path's to exclude from compress.
+
+#### Export-HBS
+
+```json
+...
+"exporthbs": {
+  "subtasks": [{
+    "name": "default",
+    "files": {
+      "src": ["./src/tmpl/partials/**/*.hbs"],
+      "dest": "<%= destination %>/hbs"
+    }
+  }, {
+    "name": "packages",
+    "files": {
+      "src": [],
+      "dest": "<%= destination %>/hbs"
+    },
+    "options": {
+      "base": "./node_modules"
+    }
+  }]
+},
+...
+```
