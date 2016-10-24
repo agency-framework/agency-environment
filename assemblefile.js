@@ -1,6 +1,7 @@
 "use strict";
 
 require('colors');
+var assemble = require('./lib/assemble/config');
 var template = require('lodash/template');
 var options = require('minimist')(process.argv.slice(2));
 
@@ -15,6 +16,17 @@ var tasksConfig = JSON.parse(template(JSON.stringify(require(process.cwd() + '/'
 var gulp = require('gulp');
 var runSequence = require('run-sequence').use(gulp);
 var livereload = require('gulp-livereload');
+
+
+// handlebars helpers
+
+(tasksConfig.handlebars.helpers || []).forEach(function(helper) {
+    assemble.asyncHelper(helper.name, require(helper.src).apply(require, {
+        assemble: assemble,
+        config: helper.config
+    }));
+});
+
 
 // tasks
 
