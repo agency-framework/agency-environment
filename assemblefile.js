@@ -22,7 +22,7 @@ var livereload = require('gulp-livereload');
 // handlebars helpers
 
 (tasksConfig.handlebars.helpers || []).forEach(function (helper) {
-    assemble.asyncHelper(helper.name, require(helper.src).apply(require, {
+    assemble.asyncHelper(helper.name, require(helper.src)({
         assemble: assemble,
         config: helper.config
     }));
