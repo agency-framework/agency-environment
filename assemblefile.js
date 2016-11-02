@@ -50,26 +50,6 @@ gulp.task('watch', function (cb) {
     cb();
 });
 
-// build
-
-gulp.task('build', function(callback) {
-    runSequence('prebuild', 'webpack:app', 'zip-compress:default', callback);
-});
-
-gulp.task('prebuild', function (callback) {
-    runSequence('register-packages:default', 'clean', ['copy', 'fontmin', 'webpack:embed', 'purecss'], 'postcss', 'handlebars', ['sitemap'], callback);
-});
-
-// banner build
-
-gulp.task('build-banner', function (callback) {
-    runSequence('clean', ['copy', 'fontmin', 'webpack:embed', 'webpack:app', 'postcss'], 'handlebars', 'zip-compress:banner', callback);
-});
-
-gulp.task('prebuild-banner', function (callback) {
-    runSequence('clean', ['copy', 'fontmin', 'webpack:embed', 'postcss'], 'handlebars', callback);
-});
-
 // register-packages
 
 if (tasksConfig.registerpackages) {
@@ -98,3 +78,23 @@ if (tasksConfig.exporthbs) {
         runSequence('clean', 'register-packages:default', 'export-hbs', callback);
     });
 }
+
+// build
+
+gulp.task('build', function(callback) {
+    runSequence('prebuild', 'webpack:app', callback);
+});
+
+gulp.task('prebuild', function (callback) {
+    runSequence('register-packages:default', 'clean', ['copy', 'fontmin', 'webpack:embed', 'purecss'], 'postcss', 'handlebars', ['sitemap'], callback);
+});
+
+// banner build
+
+gulp.task('build-banner', function (callback) {
+    runSequence('clean', ['copy', 'fontmin', 'webpack:embed', 'webpack:app', 'postcss'], 'handlebars', 'zip-compress:banner', callback);
+});
+
+gulp.task('prebuild-banner', function (callback) {
+    runSequence('clean', ['copy', 'fontmin', 'webpack:embed', 'postcss'], 'handlebars', callback);
+});
