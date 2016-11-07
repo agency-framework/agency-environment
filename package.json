@@ -44,6 +44,7 @@
     "gulp-livereload": "3.8.1",
     "gulp-nodemon": "2.0.4",
     "gulp-notify": "2.2.0",
+    "gulp-plumber": "^1.1.0",
     "gulp-postcss": "6.1.1",
     "gulp-rimraf": "0.2.0",
     "gulp-sitemap": "2.2.0",
