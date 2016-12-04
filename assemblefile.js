@@ -68,15 +68,10 @@ if (tasksConfig.zipcompress) {
 
 // export
 
-if (tasksConfig.exporthbs) {
-    gulp.task('export-hbs', require('./lib/tasks/export/hbs')('export-hbs', tasksConfig.exporthbs, serverConfig));
+if (tasksConfig.export) {
+    gulp.task('export',require('./lib/tasks/export')('export', tasksConfig.export, serverConfig));
 } else {
-    console.log('[' + 'task'.gray + '][' + 'export-hbs'.gray + ']', 'Missing Config'.bold.red);
-}
-if (tasksConfig.exporthbs) {
-    gulp.task('export', function (callback) {
-        runSequence('clean', 'register-packages:default', 'export-hbs', callback);
-    });
+    console.log('[' + 'task'.gray + '][' + 'export'.gray + ']', 'Missing Config'.bold.red);
 }
 
 // build

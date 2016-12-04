@@ -32,23 +32,47 @@ List of path's to exclude from compress.
 
 ```json
 ...
-"exporthbs": {
+"export": {
   "subtasks": [{
     "name": "default",
     "files": {
-      "src": ["./src/tmpl/partials/**/*.hbs"],
-      "dest": "<%= destination %>/hbs"
+      "src": [],
+      "dest": "<%= destination %>"
     }
   }, {
-    "name": "packages",
+    "name": "tmpl",
+    "files": {
+      "src": ["./src/tmpl/partials/**/*.hbs"],
+      "dest": "<%= destination %>/tmpl"
+    }
+  }, {
+    "name": "tmpl-packages",
     "files": {
       "src": [],
-      "dest": "<%= destination %>/hbs"
+      "dest": "<%= destination %>/tmpl"
     },
     "options": {
       "base": "./node_modules"
     }
+  }, {
+    "name": "assets",
+    "files": {
+      "src": ["./production/assets/**/*.*"],
+      "dest": "<%= destination %>/assets"
+    }
+  }, {
+    "name": "pcss",
+    "files": {
+      "src": ["./production/css/**/*.css"],
+      "dest": "<%= destination %>/css"
+    }
+  }, {
+    "name": "js",
+    "files": {
+      "src": ["./production/js/**/*.js"],
+      "dest": "<%= destination %>/js"
+    }
   }]
-},
+}
 ...
 ```
