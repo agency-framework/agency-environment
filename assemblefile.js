@@ -5,6 +5,11 @@ var assemble = require('./lib/assemble/config');
 var template = require('lodash/template');
 var options = require('minimist')(process.argv.slice(2));
 var upath = require('upath');
+var registry = require('./lib/assemble/plugins/registry');
+
+if (options.env === 'package-production' || options.env === 'package-development') {
+    registry.srcPath = 'test';
+}
 
 var serverConfig = JSON.parse(template(JSON.stringify(require(upath.join(process.cwd(), options.serverConfig) || upath.join(process.cwd(), './env/config/local.json'))))({
     'root': process.cwd()
@@ -21,7 +26,7 @@ var livereload = require('gulp-livereload');
 
 // handlebars helpers
 
-(tasksConfig.handlebars.helpers || []).forEach(function (helper) {
+(tasksConfig.handlebars.helpers || []).forEach(function(helper) {
     assemble.asyncHelper(helper.name, require(helper.src)({
         assemble: assemble,
         config: helper.config
