@@ -7,9 +7,10 @@ var options = require('minimist')(process.argv.slice(2));
 var upath = require('upath');
 var registry = require('./lib/assemble/plugins/registry');
 
-if (options.env === 'package-production' || options.env === 'package-development') {
-    registry.srcPath = 'test';
-}
+
+var gulp = require('gulp');
+var runSequence = require('run-sequence').use(gulp);
+var livereload = require('gulp-livereload');
 
 var serverConfig = JSON.parse(template(JSON.stringify(require(upath.join(process.cwd(), options.serverConfig) || upath.join(process.cwd(), './env/config/local.json'))))({
     'root': process.cwd()
@@ -19,9 +20,13 @@ var tasksConfig = JSON.parse(template(JSON.stringify(require(upath.join(process.
     'root': process.cwd()
 }));
 
-var gulp = require('gulp');
-var runSequence = require('run-sequence').use(gulp);
-var livereload = require('gulp-livereload');
+
+// Registry Setup
+
+if (options.env === 'package-production' || options.env === 'package-development') {
+    registry.srcPath = 'test';
+}
+registry.setConfig(tasksConfig.handlebars.registry);
 
 
 // handlebars helpers
@@ -46,7 +51,7 @@ gulp.task('postcss', require('./lib/tasks/postcss')('postcss', tasksConfig.postc
 gulp.task('purecss', require('./lib/tasks/purecss')(tasksConfig.purecss));
 gulp.task('sitemap', require('./lib/tasks/sitemap')('sitemap', tasksConfig.sitemap, serverConfig));
 gulp.task('webpack', require('./lib/tasks/webpack')('webpack', tasksConfig.webpack, serverConfig)());
-gulp.task('watch', function (cb) {
+gulp.task('watch', function(cb) {
     if (serverConfig.livereload) {
         livereload.listen({
             port: serverConfig.livereload.port
@@ -74,7 +79,7 @@ if (tasksConfig.zipcompress) {
 // export
 
 if (tasksConfig.export) {
-    gulp.task('export',require('./lib/tasks/export')('export', tasksConfig.export, serverConfig));
+    gulp.task('export', require('./lib/tasks/export')('export', tasksConfig.export, serverConfig));
 } else {
     console.log('[' + 'task'.gray + '][' + 'export'.gray + ']', 'Missing Config'.bold.red);
 }
@@ -85,16 +90,16 @@ gulp.task('build', function(callback) {
     runSequence('prebuild', 'webpack:app', callback);
 });
 
-gulp.task('prebuild', function (callback) {
+gulp.task('prebuild', function(callback) {
     runSequence('register-packages:default', 'clean', ['copy', 'fontmin', 'webpack:embed', 'purecss'], 'postcss', 'handlebars', ['sitemap'], callback);
 });
 
 // banner build
 
-gulp.task('build-banner', function (callback) {
+gulp.task('build-banner', function(callback) {
     runSequence('clean', ['copy', 'fontmin', 'webpack:embed', 'webpack:app', 'postcss'], 'handlebars', 'zip-compress:banner', callback);
 });
 
-gulp.task('prebuild-banner', function (callback) {
+gulp.task('prebuild-banner', function(callback) {
     runSequence('clean', ['copy', 'fontmin', 'webpack:embed', 'postcss'], 'handlebars', callback);
 });
