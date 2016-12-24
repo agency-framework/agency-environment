@@ -79,7 +79,7 @@
     "through2": "2.0.0",
     "upath": "0.1.6",
     "url-loader": "0.5.6",
-    "webpack": "1.12.3",
+    "webpack": "1.12.4",
     "webpack-polyfills-plugin": "0.0.8",
     "webpack-stream": "2.1.1"
   }
