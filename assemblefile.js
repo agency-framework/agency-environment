@@ -28,13 +28,15 @@ if (options.env === 'package-production' || options.env === 'package-development
 }
 registry.setConfig(tasksConfig.handlebars.registry);
 
+var engine = require('engine-handlebars');
 
 // handlebars helpers
 
 (tasksConfig.handlebars.helpers || []).forEach(function(helper) {
     assemble.asyncHelper(helper.name, require(helper.src)({
         assemble: assemble,
-        config: helper.config
+        config: helper.config,
+        engine: engine.Handlebars
     }));
 });
 
