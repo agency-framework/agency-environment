@@ -91,7 +91,7 @@ gulp.task('build', function(callback) {
 });
 
 gulp.task('prebuild', function(callback) {
-    runSequence('register-packages:default', 'clean', ['copy', 'fontmin', 'webpack:embed', 'purecss'], 'postcss', 'handlebars', ['sitemap'], callback);
+    runSequence('register-packages:default', 'clean', ['copy', 'fontmin', 'webpack:embed', 'purecss'], 'handlebars', 'postcss', ['sitemap'], callback);
 });
 
 // banner build
