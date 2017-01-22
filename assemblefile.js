@@ -23,7 +23,7 @@ var tasksConfig = JSON.parse(template(JSON.stringify(require(upath.join(process.
 
 // Registry Setup
 
-if (options.env === 'package-production' || options.env === 'package-development') {
+if (options.env === 'package-build' || options.env === 'package-production' || options.env === 'package-development') {
     registry.srcPath = 'test';
 }
 registry.setConfig(tasksConfig.handlebars.registry);
