@@ -20,16 +20,18 @@ var tasksConfig = JSON.parse(template(JSON.stringify(require(upath.join(process.
     'root': process.cwd()
 }));
 
-
-// Registry Setup
+/*
+ * Registry Setup
+ */
 
 if (options.env === 'package-build' || options.env === 'package-production' || options.env === 'package-development') {
     registry.srcPath = 'test';
 }
 registry.setConfig(tasksConfig.handlebars.registry);
 
-
-// handlebars helpers
+/*
+ * Handlebars Helpers
+ */
 
 (tasksConfig.handlebars.helpers || []).forEach(function(helper) {
     assemble.asyncHelper(helper.name, require(helper.src)({
@@ -39,7 +41,9 @@ registry.setConfig(tasksConfig.handlebars.registry);
 });
 
 
-// tasks
+/*
+ * Tasks
+ */
 
 // general
 
@@ -103,3 +107,8 @@ gulp.task('build-banner', function(callback) {
 gulp.task('prebuild-banner', function(callback) {
     runSequence('clean', ['copy', 'fontmin', 'webpack:embed', 'postcss'], 'handlebars', callback);
 });
+
+module.exports = {
+    serverConfig: serverConfig,
+    tasksConfig: tasksConfig
+};
